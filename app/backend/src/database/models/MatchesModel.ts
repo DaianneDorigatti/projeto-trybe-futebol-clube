@@ -1,4 +1,4 @@
-import { Model, INTEGER, STRING, NUMBER, BOOLEAN } from 'sequelize';
+import { Model, INTEGER, BOOLEAN } from 'sequelize';
 import db from '.';
 import Teams from './TeamsModel';
 
@@ -20,36 +20,36 @@ Matches.init({
   },
   homeTeamId: {
     type: INTEGER,
-    allowNull: false,  
-    field: 'home_team_id',  
+    allowNull: false,
+    field: 'home_team_id',
     references: {
-        model: 'teams',
-        key: 'id'
-      },
+      model: 'teams',
+      key: 'id',
+    },
   },
   homeTeamGoals: {
     type: INTEGER,
     allowNull: false,
-    field: 'home_team_goals'
+    field: 'home_team_goals',
   },
   awayTeamId: {
     type: INTEGER,
     allowNull: false,
     field: 'away_team_id',
     references: {
-        model: 'teams',
-        key: 'id'
-      },
+      model: 'teams',
+      key: 'id',
+    },
   },
   awayTeamGoals: {
     type: INTEGER,
     allowNull: false,
-    field: 'away_team_goals'
+    field: 'away_team_goals',
   },
   inProgress: {
     type: BOOLEAN,
     allowNull: false,
-    field: 'in_progress'
+    field: 'in_progress',
   },
 
 }, {
@@ -79,4 +79,3 @@ Teams.hasMany(Matches, {
 });
 
 export default Matches;
-
