@@ -5,6 +5,17 @@ class TeamsService {
     const teams = await TeamsModel.findAll();
     return teams;
   }
+
+  public static async findById(id: number): Promise<TeamsModel> {
+    const teamId = await TeamsModel.findOne({
+      where: { id },
+    });
+    if (!teamId) {
+      throw new Error('Time não encontrado');
+    }
+
+    return teamId.toJSON();
+  }
 }
 
 export default TeamsService;
