@@ -14,12 +14,12 @@ class UsersService {
     });
 
     if (!user) {
-      throw new Error('Usuário ou senha inválidos!');
+      throw new Error('Invalid email or password');
     }
 
     const verifyPassword = await compare(password, user.password);
     if (!verifyPassword) {
-      throw new Error('Senha inválida!');
+      throw new Error('Invalid email or password');
     }
 
     const token = getToken.generateToken(user.dataValues);
