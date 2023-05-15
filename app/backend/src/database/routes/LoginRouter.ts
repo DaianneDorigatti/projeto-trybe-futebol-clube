@@ -1,15 +1,15 @@
-import { Router } from 'express';
-import validateLogin from '../middleware/validateLogin';
-import UsersController from '../controller/UsersController';
+// import { Router } from 'express';
+// import validateLogin from '../middleware/validateLogin';
+// import UsersController from '../controller/UsersController';
 
-const LoginRouter = Router();
+// const LoginRouter = Router();
 
-LoginRouter.post(
-  '/',
-  validateLogin.loginExists,
-  validateLogin.isEmailValid,
-  validateLogin.isPasswordValid,
-  UsersController.login,
-);
+// LoginRouter.post(
+//   '/',
+//   validateLogin.loginExists,
+//   validateLogin.isEmailValid,
+//   validateLogin.isPasswordValid,
+//   UsersController.login,
+// );
 
-export default LoginRouter;
+// export default LoginRouter;

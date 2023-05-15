@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { validateToken } from '../utils/auth';
+import getToken from '../utils/auth';
 
 const authToken = (req: Request, res: Response, next: NextFunction) => {
   const { authorization } = req.headers;
@@ -9,7 +9,7 @@ const authToken = (req: Request, res: Response, next: NextFunction) => {
       message: 'Token not found',
     });
   }
-  const { message, type } = validateToken(authorization);
+  const { message, type } = getToken.validateToken(authorization);
 
   if (type) {
     return res.status(401).send({

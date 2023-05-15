@@ -18,6 +18,7 @@ Matches.init({
     primaryKey: true,
     autoIncrement: true,
   },
+
   homeTeamId: {
     type: INTEGER,
     allowNull: false,
@@ -27,11 +28,13 @@ Matches.init({
       key: 'id',
     },
   },
+
   homeTeamGoals: {
     type: INTEGER,
     allowNull: false,
     field: 'home_team_goals',
   },
+
   awayTeamId: {
     type: INTEGER,
     allowNull: false,
@@ -41,11 +44,13 @@ Matches.init({
       key: 'id',
     },
   },
+
   awayTeamGoals: {
     type: INTEGER,
     allowNull: false,
     field: 'away_team_goals',
   },
+
   inProgress: {
     type: BOOLEAN,
     allowNull: false,
@@ -53,6 +58,7 @@ Matches.init({
   },
 
 }, {
+  underscored: true,
   sequelize: db,
   modelName: 'matches',
   timestamps: false,
