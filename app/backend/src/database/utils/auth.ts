@@ -18,13 +18,14 @@ const validateToken = (token:string) => {
     const jwtPayload = jwt.verify(token, secretKey);
     return { message: jwtPayload, type: null };
   } catch (err) {
-    return { message: 'Expired or invalid token', type: 'INVALID_TOKEN' };
+    return { message: 'Token must be a valid token', type: 'INVALID_TOKEN' };
   }
 };
 
 const getToken = {
   generateToken,
   validateToken,
+
 };
 
 export default getToken;

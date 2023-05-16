@@ -21,8 +21,8 @@ const isEmailValid = (req: Request, res: Response, next: NextFunction) => {
   const regexEmail = /\S+@\S+\.\S+/;
 
   if (!regexEmail.test(email)) {
-    return res.status(400).send({
-      message: '"email" must be a valid email',
+    return res.status(401).send({
+      message: 'Invalid email or password',
     });
   }
   return next();
@@ -32,8 +32,8 @@ const isPasswordValid = (req: Request, res: Response, next: NextFunction) => {
   const { password } = req.body;
 
   if (password.length < 6) {
-    return res.status(400).send({
-      message: '"password" length must be at least 6 characters long',
+    return res.status(401).send({
+      message: 'Invalid email or password',
     });
   }
   return next();
@@ -43,6 +43,7 @@ const validateLogin = {
   loginExists,
   isEmailValid,
   isPasswordValid,
+
 };
 
 export default validateLogin;

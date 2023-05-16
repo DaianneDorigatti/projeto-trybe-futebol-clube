@@ -1,4 +1,4 @@
-import * as sinon from 'sinon';
+import Sinon, * as sinon from 'sinon';
 import * as chai from 'chai';
 // @ts-ignore
 import chaiHttp = require('chai-http');
@@ -39,4 +39,6 @@ describe('Testando TeamsModel', () => {
     afterEach(()=>{
       sinon.restore();
   })
+
+
 })

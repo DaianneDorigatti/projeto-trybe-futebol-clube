@@ -19,6 +19,4 @@ const authToken = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
-export default {
-  authToken,
-};
+export default authToken;
