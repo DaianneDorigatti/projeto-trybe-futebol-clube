@@ -8,11 +8,20 @@ class MatchesController {
     res.status(200).json(result);
   }
 
-  public static async updatingMatches(req: Request, res: Response) {
+  public static async updatingFinishMatches(req: Request, res: Response) {
     const { id } = req.params;
-    await MatchesService.updatingMatches(+id);
+    await MatchesService.updatingFinishMatches(+id);
     return res.status(200).send({
       message: 'Finished',
+    });
+  }
+
+  public static async updatingResultMatches(req: Request, res: Response) {
+    const { id } = req.params;
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+    await MatchesService.updatingResultMatches(+id, +homeTeamGoals, +awayTeamGoals);
+    return res.status(200).send({
+      message: 'Changes successfully',
     });
   }
 }

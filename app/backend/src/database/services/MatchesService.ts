@@ -24,12 +24,26 @@ class MatchesService {
     return matches;
   }
 
-  public static async updatingMatches(id: number): Promise<void> {
+  public static async updatingFinishMatches(id: number): Promise<void> {
     const matchId = await Matches.findByPk(id);
     if (!matchId) { throw new Error('Match not found!'); }
     // https://sequelize.org/docs/v6/core-concepts/model-querying-basics/#simple-update-queries
     await matchId.update({
       inProgress: false,
+    }, {
+      where: { id },
+    });
+  }
+
+  public static async updatingResultMatches(id: number, homeTeamGoals:number, awayTeamGoals:number):
+  Promise<void> {
+    const matchId = await Matches.findByPk(id);
+    if (!matchId) { throw new Error('Match not found!'); }
+    // https://sequelize.org/docs/v6/core-concepts/model-querying-basics/#simple-update-queries
+    await matchId.update({
+      homeTeamGoals,
+      awayTeamGoals,
+
     }, {
       where: { id },
     });
