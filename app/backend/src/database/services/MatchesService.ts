@@ -48,6 +48,19 @@ class MatchesService {
       where: { id },
     });
   }
+
+  //   public static async createMatches(
+
+  //     homeTeamId:number,
+  //     awayTeamId:number,
+  //     homeTeamGoals:number,
+  //     awayTeamGoals:number,
+
+//   ):
+//     Promise<Matches> {
+//     const newMatch = await Matches.create({ homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals });
+//     return newMatch;
+//   }
 }
 
 export default MatchesService;
