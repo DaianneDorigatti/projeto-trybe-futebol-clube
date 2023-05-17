@@ -66,8 +66,7 @@ export const teamsMock = [
   ];
 
   export const teamMock = 
-    {
-      "id": 1,
-      "teamName": "Avaí/Kindermann"
-    }
-
+  {
+    "id": 16,
+    "teamName": "São Paulo"
+  }

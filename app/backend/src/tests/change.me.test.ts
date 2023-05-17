@@ -11,6 +11,7 @@ import { teamMock, teamsMock } from './TeamsModel.mock';
 import { matchesMock } from './MatchesModel.mock'
 import MatchesModel from '../database/models/MatchesModel'
 import TeamsService from '../database/services/TeamsService';
+import MatchesService from '../database/services/MatchesService';
 
 
 chai.use(chaiHttp);
@@ -18,7 +19,7 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 describe('Testando TeamsModel', () => {  
-    it('Testa se retorna todos os times', async function () {
+    it('Testa se retorna todos os times - Camada Model', async function () {
       // Arrange
       sinon.stub(TeamsModel, 'findAll').resolves(teamsMock as TeamsModel[]);
       // Act
@@ -29,7 +30,11 @@ describe('Testando TeamsModel', () => {
       
     });  
 
-    it('Testa se retorna o time por id', async function () {
+    afterEach(()=>{
+      sinon.restore();
+    })
+
+    it('Testa se retorna o time por id - Camada Model', async function () {
       // Arrange
       sinon.stub(TeamsModel, 'findOne').resolves(teamMock as TeamsModel);
       // Act
@@ -41,18 +46,52 @@ describe('Testando TeamsModel', () => {
 
     afterEach(()=>{
       sinon.restore();
-  })
+    })
 
-it('Testa se retorna o time por id - Service', async function () {
-  // Arrange
-  sinon.stub(TeamsModel, 'findAll').resolves([]);
-  // Act
-  expect(await TeamsService.findAll()).to.be.deep.equal([]);
-  
-});  
+      it('Testa se retorna todos os times - Camada Service', async function () {
+    // Arrange
+      sinon.stub(TeamsModel, 'findAll').resolves([]);
+    // Act
+      expect(await TeamsService.findAll()).to.be.deep.equal([]);
+    
+    });  
 
-afterEach(()=>{
-  sinon.restore();
+      afterEach(()=>{
+      sinon.restore();
+    })
+
+    it('Testa se retorna o time por id - Camada Service', async function () {
+      // Arrange
+      sinon.stub(TeamsModel, 'findByPk').resolves(teamMock as TeamsModel);
+      // Act
+      const result = await TeamsService.findById(16);
+      // Assert
+      expect(result).to.be.a('object');
+      expect(result).to.be.deep.eq(teamMock);
+      
+    });  
+
+    afterEach(()=>{
+      sinon.restore();
+    })
 })
-})
+
+  describe('Testando MatchesModel', () => {  
+    it('Testa se retorna todas as partidas - Camada Model', async function () {
+      // Arrange
+      sinon.stub(MatchesModel, 'findAll').resolves(matchesMock as unknown as MatchesModel[]);
+      // Act
+      const result = await request(app).get('/matches');
+      // Assert
+      expect(result).to.be.a('object');
+      expect(result.body).to.be.deep.eq(matchesMock);
+      
+    });  
+
+    afterEach(()=>{
+      sinon.restore();
+    })
+ })
+
+
 
