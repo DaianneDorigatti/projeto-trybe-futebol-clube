@@ -2,7 +2,7 @@ import Matches from '../models/MatchesModel';
 import Teams from '../models/TeamsModel';
 
 class MatchesService {
-  public static async findAll(inProgress: unknown): Promise<Matches[]> {
+  public static async findFinishedMatches(inProgress: unknown): Promise<Matches[]> {
     const matches = await Matches.findAll({
       include: [
         {
@@ -24,10 +24,11 @@ class MatchesService {
     return matches;
   }
 
-  public static async findMatchFinished(id: number): Promise<void> {
-    const response = await Matches.findByPk(id);
-    if (!response) { throw new Error('Match not found!'); }
-    await response.update({
+  public static async updatingMatches(id: number): Promise<void> {
+    const matchId = await Matches.findByPk(id);
+    if (!matchId) { throw new Error('Match not found!'); }
+    // https://sequelize.org/docs/v6/core-concepts/model-querying-basics/#simple-update-queries
+    await matchId.update({
       inProgress: false,
     }, {
       where: { id },

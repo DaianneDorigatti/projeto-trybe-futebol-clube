@@ -2,16 +2,18 @@ import { Request, Response } from 'express';
 import MatchesService from '../services/MatchesService';
 
 class MatchesController {
-  public static async findAll(req: Request, res: Response) {
+  public static async findFinishedMatches(req: Request, res: Response) {
     const { inProgress } = req.query;
-    const result = await MatchesService.findAll(inProgress);
+    const result = await MatchesService.findFinishedMatches(inProgress);
     res.status(200).json(result);
   }
 
-  public static async matchesFinished(req: Request, res: Response) {
+  public static async updatingMatches(req: Request, res: Response) {
     const { id } = req.params;
-    const result = await MatchesService.findMatchFinished(+id);
-    res.status(200).json(result);
+    await MatchesService.updatingMatches(+id);
+    return res.status(200).send({
+      message: 'Finished',
+    });
   }
 }
 
