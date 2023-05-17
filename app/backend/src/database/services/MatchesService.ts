@@ -24,27 +24,15 @@ class MatchesService {
     return matches;
   }
 
-  //   public static async matchFinish(id: number): Promise<void> {
-  //     const response = await Matches.findByPk(id);
-  //     if (!response) { throw new Error('Match not found!'); }
-  //     await response.update({
-  //       inProgress: false,
-  //     }, {
-  //       where: { id },
-  //     });
-  //   }
-
-//   public static async addMatchFinish(
-//     id: number,
-//     homeTeamGoals: number,
-//     awayTeamGoals: number,
-//   ): Promise<void> {
-//     const response = await Matches.findByPk(id);
-//     if (!response) { throw new Error('Match not found!'); }
-//     response.homeTeamGoals = homeTeamGoals;
-//     response.awayTeamGoals = awayTeamGoals;
-//     response.save();
-//   }
+  public static async findMatchFinished(id: number): Promise<void> {
+    const response = await Matches.findByPk(id);
+    if (!response) { throw new Error('Match not found!'); }
+    await response.update({
+      inProgress: false,
+    }, {
+      where: { id },
+    });
+  }
 }
 
 export default MatchesService;

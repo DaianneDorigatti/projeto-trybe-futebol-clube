@@ -1,7 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import getToken from '../utils/auth';
 
-const authToken = (req: Request, res: Response, next: NextFunction) => {
+// Função do projeto Blogs API
+
+const authToken = async (req: Request, res: Response, next: NextFunction) => {
   const { authorization } = req.headers;
 
   if (!authorization) {

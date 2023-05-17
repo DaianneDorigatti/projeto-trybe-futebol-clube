@@ -8,18 +8,11 @@ class MatchesController {
     res.status(200).json(result);
   }
 
-  // public static async matchesFinished(req: Request, res: Response) {
-  //   const { id } = req.params;
-  //   await MatchesService.matchFinish(+id);
-  //   res.status(200).json({ message: 'Finished' });
-  // }
-
-  // public static async updtatingMatches(req: Request, res: Response) {
-  //   const { id } = req.params;
-  //   const { homeTeamGoals, awayTeamGoals } = req.body;
-  //   await MatchesService.addMatchFinish(+id, homeTeamGoals, awayTeamGoals);
-  //   res.status(200).json({ message: 'Match Updated' });
-  // }
+  public static async matchesFinished(req: Request, res: Response) {
+    const { id } = req.params;
+    const result = await MatchesService.findMatchFinished(+id);
+    res.status(200).json(result);
+  }
 }
 
 export default MatchesController;

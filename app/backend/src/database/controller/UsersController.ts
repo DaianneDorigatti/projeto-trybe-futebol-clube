@@ -12,5 +12,17 @@ class UserController {
       next(err);
     }
   }
+
+  // public static async getUserRole(req: Request, res: Response, next: NextFunction) {
+  //   try {
+  //     const { email } = res.locals.validateToken;
+  //     const user = await UsersService.getUserRole(email);
+
+  //     return res.status(200).json({ role: user });
+  //   } catch (err) {
+  //     next(err);
+  //   }
+  // }
 }
+
 export default UserController;

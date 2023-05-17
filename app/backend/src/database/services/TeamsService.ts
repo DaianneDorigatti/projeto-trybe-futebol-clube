@@ -11,7 +11,7 @@ class TeamsService {
       where: { id },
     });
     if (!teamId) {
-      throw new Error('Time não encontrado');
+      throw new Error('Team not found!');
     }
 
     return teamId.toJSON();

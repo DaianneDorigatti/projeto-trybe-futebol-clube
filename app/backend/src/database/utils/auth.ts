@@ -1,6 +1,8 @@
 import { SignOptions } from 'jsonwebtoken';
 import jwt = require('jsonwebtoken');
 
+// Funções do projeto Blogs API
+
 const secretKey = process.env.JWT_SECRET || 'jwt_secret';
 
 const configJWT: SignOptions = {
