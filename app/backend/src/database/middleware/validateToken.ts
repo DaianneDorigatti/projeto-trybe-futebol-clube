@@ -18,6 +18,9 @@ const authToken = async (req: Request, res: Response, next: NextFunction) => {
       message,
     });
   }
+  // https://expressjs.com/en/api.html - res.locals(variável global)
+  res.locals.user = message;
+
   next();
 };
 

@@ -32,13 +32,13 @@ class UsersService {
     return { message: token, type: null };
   }
 
-  // public static async getUserRole(email:string) {
-  //   const user = await UsersModel.findOne({
-  //     where: { email },
-  //   });
+  public static async getUserRole(email:string) {
+    const user = await UsersModel.findOne({
+      where: { email },
+    });
 
-  //   return user;
-  // }
+    return user;
+  }
 }
 
 export default UsersService;

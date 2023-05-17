@@ -8,6 +8,9 @@ import { Response } from 'superagent';
 import { request } from 'chai';
 import TeamsModel from '../database/models/TeamsModel';
 import { teamMock, teamsMock } from './TeamsModel.mock';
+import { matchesMock } from './MatchesModel.mock'
+import MatchesModel from '../database/models/MatchesModel'
+import TeamsService from '../database/services/TeamsService';
 
 
 chai.use(chaiHttp);
@@ -33,10 +36,23 @@ describe('Testando TeamsModel', () => {
       const result = await request(app).get('/teams/1');
       // Assert
       expect(result).to.be.a('object');
-      // expect(result.body).to.be.deep.eq(teamMock);
+      
     });  
 
     afterEach(()=>{
       sinon.restore();
   })
+
+it('Testa se retorna o time por id - Service', async function () {
+  // Arrange
+  sinon.stub(TeamsModel, 'findAll').resolves([]);
+  // Act
+  expect(await TeamsService.findAll()).to.be.deep.equal([]);
+  
+});  
+
+afterEach(()=>{
+  sinon.restore();
 })
+})
+

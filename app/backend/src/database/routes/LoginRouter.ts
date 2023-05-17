@@ -16,6 +16,7 @@ LoginRouter.post(
 LoginRouter.get(
   '/role',
   authToken,
+  UserController.getUserRole,
 );
 
 export default LoginRouter;

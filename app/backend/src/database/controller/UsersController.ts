@@ -13,16 +13,16 @@ class UserController {
     }
   }
 
-  // public static async getUserRole(req: Request, res: Response, next: NextFunction) {
-  //   try {
-  //     const { email } = res.locals.validateToken;
-  //     const user = await UsersService.getUserRole(email);
+  public static async getUserRole(req: Request, res: Response, next: NextFunction) {
+    // https://expressjs.com/en/api.html - res.locals(variável global)
+    try {
+      const { role } = res.locals.user;
 
-  //     return res.status(200).json({ role: user });
-  //   } catch (err) {
-  //     next(err);
-  //   }
-  // }
+      return res.status(200).json({ role });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 export default UserController;
