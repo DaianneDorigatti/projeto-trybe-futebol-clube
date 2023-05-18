@@ -49,18 +49,17 @@ class MatchesService {
     });
   }
 
-  //   public static async createMatches(
-
-  //     homeTeamId:number,
-  //     awayTeamId:number,
-  //     homeTeamGoals:number,
-  //     awayTeamGoals:number,
-
-//   ):
-//     Promise<Matches> {
-//     const newMatch = await Matches.create({ homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals });
-//     return newMatch;
-//   }
+  public static async createMatches(
+    homeTeamId:number,
+    awayTeamId:number,
+    homeTeamGoals:number,
+    awayTeamGoals:number,
+  ):
+    Promise<Matches> {
+    const newMatch = await Matches.create({
+      homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals, inProgress: true });
+    return newMatch;
+  }
 }
 
 export default MatchesService;

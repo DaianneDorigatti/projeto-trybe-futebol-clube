@@ -6,12 +6,12 @@ class TeamsService {
     return teams;
   }
 
-  public static async findById(id: number): Promise<TeamsModel> {
+  public static async findById(id: number) {
     const teamId = await TeamsModel.findOne({
       where: { id },
     });
     if (!teamId) {
-      throw new Error('Team not found!');
+      throw new Error('There is no team with such id!');
     }
 
     return teamId.toJSON();

@@ -25,15 +25,12 @@ class MatchesController {
     });
   }
 
-  // public static async createMatches(req: Request, res: Response) {
-  //   const { homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals } = req.body;
-  //   // const { id, inProgress } = req.params;
-  //   const newMatch = await MatchesService
-  //     .createMatches(homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals);
-  //   return res.status(201).json({
-  //     newMatch,
-  //   });
-  // }
+  public static async createMatches(req: Request, res: Response) {
+    const { homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals } = req.body;
+    const newMatch = await MatchesService
+      .createMatches(homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals);
+    return res.status(201).json(newMatch);
+  }
 }
 
 export default MatchesController;
