@@ -12,6 +12,9 @@ import { matchesMock } from './MatchesModel.mock'
 import MatchesModel from '../database/models/MatchesModel'
 import TeamsService from '../database/services/TeamsService';
 import MatchesService from '../database/services/MatchesService';
+import Users from '../database/models/UsersModel';
+import { userMock, token } from './Users.mock';
+import UsersService from '../database/services/UsersService';
 
 
 chai.use(chaiHttp);
@@ -92,6 +95,41 @@ describe('Testando TeamsModel', () => {
       sinon.restore();
     })
  })
+
+ describe('Testando MatchesModel', () => {  
+  it('Testa se retorna todas as partidas - Camada Service', async function () {
+     // Arrange
+    sinon.stub(MatchesModel, 'findAll').resolves([]);    
+    // Assert
+    expect(await MatchesService.findFinishedMatches('inProgress')).to.be.deep.equal([]);
+    
+  });  
+
+  afterEach(()=>{
+    sinon.restore();
+  })
+})
+
+describe('Testando UsersModel', () => {  
+  it('Testa se retorna um token com login válido - Camada Service', async function () {
+     // Arrange
+    //@ts-ignore 
+    sinon.stub(UsersService, 'authenticateUser').resolves('token');
+    // Act
+    const result = await chai.request(app).post('/login').send(userMock);
+    // Assert
+    expect(result.status).to.be.deep.equal(200);  
+    expect(result).to.be.a('object');
+    
+  });  
+
+  afterEach(()=>{
+    sinon.restore();
+  })
+})
+
+ 
+
 
 
 
