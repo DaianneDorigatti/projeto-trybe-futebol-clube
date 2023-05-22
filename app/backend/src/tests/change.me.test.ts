@@ -13,8 +13,10 @@ import MatchesModel from '../database/models/MatchesModel'
 import TeamsService from '../database/services/TeamsService';
 import MatchesService from '../database/services/MatchesService';
 import Users from '../database/models/UsersModel';
-import { userMock, token } from './Users.mock';
+import { token, userValidMock, userInvalidMock, role } from './Users.mock';
 import UsersService from '../database/services/UsersService';
+import UserController from '../database/controller/UsersController';
+import TeamsController from '../database/controller/TeamsController';
 
 
 chai.use(chaiHttp);
@@ -62,6 +64,7 @@ describe('Testando TeamsModel', () => {
       afterEach(()=>{
       sinon.restore();
     })
+
 
     it('Testa se retorna o time por id - Camada Service', async function () {
       // Arrange
@@ -116,7 +119,7 @@ describe('Testando UsersModel', () => {
     //@ts-ignore 
     sinon.stub(UsersService, 'authenticateUser').resolves('token');
     // Act
-    const result = await chai.request(app).post('/login').send(userMock);
+    const result = await chai.request(app).post('/login').send(userValidMock);
     // Assert
     expect(result.status).to.be.deep.equal(200);  
     expect(result).to.be.a('object');
@@ -126,6 +129,93 @@ describe('Testando UsersModel', () => {
   afterEach(()=>{
     sinon.restore();
   })
+
+  it('Testa se retorna erro quando não informar a senha do usuário - Camada Service', async function () {
+    // Arrange
+   //@ts-ignore 
+   sinon.stub(UsersService, 'authenticateUser').resolves('token');
+   // Act
+   const result = await chai.request(app).post('/login').send(userInvalidMock);
+   // Assert
+   expect(result.status).to.be.deep.equal(400);  
+   expect(result).to.be.a('object');
+   
+ });  
+
+ afterEach(()=>{
+   sinon.restore();
+ })
+
+ it('Testa se retorna erro quando informar um login inválido - Camada Service', async function () {
+  // Arrange
+ //@ts-ignore 
+ sinon.stub(UsersService, 'authenticateUser').resolves('token');
+ // Act
+ const result = await chai.request(app).post('/login').send({
+  email: 'admin@admin.com',
+  password: 'teste'
+});
+ // Assert
+ expect(result.status).to.be.equal(401);  
+ expect(result).to.be.a('object');
+ 
+});  
+
+afterEach(()=>{
+ sinon.restore();
+})
+
+it('Testa se retorna erro quando informar um login inválido - Camada Controller', async function () {
+  // Arrange
+ //@ts-ignore 
+ sinon.stub(UserController, 'login').resolves('token');
+ // Act
+ const result = await chai.request(app).post('/login').send({
+  email: 'admin@admin.com',
+  password: 'teste'
+});
+ // Assert
+ expect(result.status).to.be.equal(401);  
+ expect(result).to.be.a('object');
+ 
+});  
+
+
+it('Testa se retorna erro quando login estiver vazio - Camada Model', async function () {
+  // Arrange
+ //@ts-ignore 
+ sinon.stub(UsersService, 'authenticateUser').resolves('token');
+ // Act
+ const result = await chai.request(app).post('/login').send({
+  email: '',
+  password: ''
+});
+ // Assert
+ expect(result.status).to.be.equal(400);  
+ expect(result).to.be.a('object');
+ 
+});  
+
+afterEach(()=>{
+ sinon.restore();
+})
+
+it('Testa se retorna erro de token login estiver vazio - Camada Model', async function () {
+  // Arrange
+ //@ts-ignore 
+ sinon.stub(Users, 'findOne').resolves(role as Users);
+ // Act
+ const result = await chai.request(app).get('/login/role').set('Authorization', '123');
+ // Assert
+ expect(result.status).to.be.equal(401);  
+ expect(result.body.message).to.be.eq('Token must be a valid token');
+ 
+});  
+
+afterEach(()=>{
+ sinon.restore();
+})
+
 })
 
  
