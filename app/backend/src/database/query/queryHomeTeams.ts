@@ -16,20 +16,22 @@ Contar o total de Jogos: Usar o COUNT(*) para contar tudo o que estiver no total
  - Quando o total de pontos for 1 então - empate
 https://www.w3schools.com/sql/sql_case.asp */''}
 
+
 COUNT(*) AS totalGames,
 COUNT(CASE
-     WHEN totalPoints = 3 
-     THEN 1 
+     WHEN totalPoints = 3
+     THEN 1
      END) AS totalVictories,
 COUNT(CASE
      WHEN
-     totalPoints = 0 
-     THEN 1 
+     totalPoints = 0
+     THEN 1
      END) AS totalLosses,
 COUNT(CASE
      WHEN
-     totalPoints = 1 
-     THEN 1 END) AS totalDraws,
+     totalPoints = 1
+     THEN 1 END) AS totalDraws, 
+
 
 
 ${/* Lógica do aproveitamento dos times(efficiency):
@@ -50,8 +52,8 @@ GC: Gols sofridos. */''
 SUM(goalFavor- goalOwn) AS goalsBalance
 
 ${/* Lógica dos pontos:
- - Quando o total de gols a favor for maior que gols tomados, então recebe 3 - Vitória.
- - Quando o total de gols a favor for menor que gols tomados, então recebe 0 - Derrota.
+ - Quando o total de gols do time da casa for maior que do time convidado, então recebe 3 - Vitória.
+ - Quando o total de gols do time da casa for menor que do time convidado, então recebe 0 - Derrota.
  - Quando o total de gols feitos forem iguais, então recebe 1 - Empate.
  */''}
 
