@@ -11,9 +11,9 @@ O time vitorioso: marcará +3 pontos;
 O time perdedor: marcará 0 pontos;
 Em caso de empate: ambos os times marcam +1 ponto.
 Contar o total de Jogos: Usar o COUNT(*) para contar tudo o que estiver no total de jogos.
- - Quando o total de pontos for 3 então conta 1 vitória
- - Quando o total de pontos for 0 então conta 1 derrota
- - Quando o total de pontos for 1 então conta 1 empate
+ - Quando o total de pontos for 3 então - vitória
+ - Quando o total de pontos for 0 então - derrota
+ - Quando o total de pontos for 1 então - empate
 https://www.w3schools.com/sql/sql_case.asp */''}
 
 COUNT(*) AS totalGames,
