@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import TeamsService from '../services/TeamsService';
 
 class TeamsController {
@@ -7,15 +7,10 @@ class TeamsController {
     res.status(200).json(result);
   }
 
-  public static async findById(req: Request, res: Response, next: NextFunction) {
-    try {
-      const { id } = req.params;
-      const teamById = await TeamsService.findById(+id);
-
-      return res.status(200).json(teamById);
-    } catch (error) {
-      next(error);
-    }
+  public static async findById(req: Request, res: Response) {
+    const { id } = req.params;
+    const teamById = await TeamsService.findById(+id);
+    return res.status(200).json(teamById);
   }
 }
 export default TeamsController;

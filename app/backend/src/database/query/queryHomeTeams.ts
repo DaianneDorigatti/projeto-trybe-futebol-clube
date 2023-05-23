@@ -1,5 +1,6 @@
 export default
-
+// Somar gols tomados, gols feitos e total de pontos, pois será necessário
+// pro cálculo dos pontos
 `SELECT TRYBE_FUTEBOL_CLUBE.teams.team_name AS name,
 SUM(goalOwn) AS goalsOwn,
 SUM(goalFavor) AS goalsFavor,
@@ -16,16 +17,16 @@ Contar o total de Jogos: Usar o COUNT(*) para contar tudo o que estiver no total
 https://www.w3schools.com/sql/sql_case.asp */''}
 
 COUNT(*) AS totalGames,
-SUM(CASE
+COUNT(CASE
      WHEN totalPoints = 3 
      THEN 1 
      END) AS totalVictories,
-SUM(CASE
+COUNT(CASE
      WHEN
      totalPoints = 0 
      THEN 1 
      END) AS totalLosses,
-SUM(CASE
+COUNT(CASE
      WHEN
      totalPoints = 1 
      THEN 1 END) AS totalDraws,
