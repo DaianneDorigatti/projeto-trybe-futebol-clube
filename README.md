@@ -47,7 +47,9 @@ nvm alias default 16.14
 
 ## Instalando Dependências
 
+  ```
 npm install
+  ```
 
 ## Executando aplicação
 
